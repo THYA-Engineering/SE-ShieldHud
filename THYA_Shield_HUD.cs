@@ -8,13 +8,37 @@ Setup:
          1 - Bars and Text 
          2 - Horizontal Images 
          3 - Vertical Images 
+*/
+const int MODE = 2; 
+/*
 	2.If you're using Text, choose the Text LCD Size: 
          SMALL - For Small LCDs 
          LARGE - For Large LCDs 
+*/
+const string LCD_SIZE = "LARGE"; 
+/*
 	3.Edit the Text Bar options as you wish. 
-	4.Edit the Text Bar Colors as you wish. 
+*/
+const string L_BAR_SURROUND = "{"; // Left bar surround 
+const string R_BAR_SURROUND = "}"; // Right bar surround 
+const string BAR_FILLER = "[]"; // Used to fill the bars with text 
+const string BAR_BLANK_FILLER = ".."; // Blank Filler for bar 
+/*
+	4.Edit the Text Bar Colors as you wish.
+*/
+Color COLOR_HIGH = Color.Green;
+Color COLOR_MEDIUM = Color.Yellow; 
+Color COLOR_LOW = Color.Red; 
+/*	
 	5.Edit the Text font size. 
+*/
+const float LARGE_FONT_SIZE = 3.0f; 
+const float SMALL_FONT_SIZE = 2.3f; 
+/*
 	6.Edit your LCD's name to match the name in LCD_Name. 
+*/
+const string LCD_NAME = "Shield LCD"; 
+/*
 	7.Build a timer block with the time to 1 second and click "Setup Actions". 
 	8.Action #1 should be "run" the program block but leave the argument field blank. 
 	9.Action #2 should be "start" the timer block. 
@@ -32,26 +56,10 @@ Setup:
 */ 
  
 // Settings 
- 
-const int MODE = 2; 
- 
-const string LCD_SIZE = "LARGE"; 
- 
-const string L_BAR_SURROUND = "{"; // Left bar surround 
-const string R_BAR_SURROUND = "}"; // Right bar surround 
-const string BAR_FILLER = "[]"; // Used to fill the bars with text 
-const string BAR_BLANK_FILLER = ".."; // Filler for bar 
- 
+
 const int SHIELD_HIGH = 80; // High shield value  
 const int SHIELD_LOW = 30; // Low shield value 
-Color COLOR_HIGH = Color.Green; //new Color(0, 125, 200, 255); 
-Color COLOR_MEDIUM = Color.Yellow; 
-Color COLOR_LOW = Color.Red; 
  
-const float LARGE_FONT_SIZE = 3.0f; 
-const float SMALL_FONT_SIZE = 2.3f; 
- 
-const string LCD_NAME = "Shield LCD"; 
  
 /* DO NOT EDIT BELOW THIS LINE */ 
  
