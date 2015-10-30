@@ -1,4 +1,4 @@
-/* V1.0 
+/* V1.01 
  
 Welcome to THYA's Shield HUD Script. Please follow this setup procedure. 
  
