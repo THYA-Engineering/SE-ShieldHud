@@ -1,4 +1,4 @@
-#Current Script Version 1.3.1
+#Current Script Version: 1.3.1
 This script displays your ships shield as a percentage with a visual bar output to an ingame LCD. The script is _very_ easy to customize and configure. Included at the top of the script is a beginners guide on how to setup the script initially.
 
 ##Current Version Features: 
