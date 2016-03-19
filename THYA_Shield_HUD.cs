@@ -1,14 +1,17 @@
-/* V1.3.1
+/* V1.3.2
 
-Welcome to THYA's Shield HUD Script. Please follow this setup procedure.
+Welcome to THYA's Shield HUD Script.
+
+Here is the Script's Github link in case you want to check it out!
+https://github.com/THYA-Engineering/SE-ShieldHud
 
 Setup Instructions:
-Go through these 13 steps and change the values in "Quotes" if need be.
+Follow these steps changing only the values after = some of which are in "Quotes" if need be.
 ------------------------------------------------------------------
-1. Install Beta Energy Shields by Cython from the Steam
+1. Install Beta Energy Shields by Cython from the Steam and add it to your mod list.
    Workshop: http://steamcommunity.com/workshop/filedetails/?id=484504816
 ------------------------------------------------------------------
-2. Install the THYA Shield HUD Graphics Pack: http://bit.ly/1PVsZQ6
+2. Install the THYA Shield HUD Graphics Pack and add it to your mod list: http://bit.ly/1PVsZQ6
 ------------------------------------------------------------------
 3. Name just one of your Shield Generators "Shield:"
 ------------------------------------------------------------------
@@ -27,14 +30,20 @@ const string LCD_NAME = "Shield LCD";
 const int MODE = 1;
 /*
 ------------------------------------------------------------------
-6. If you're using Text, choose the Text LCD Size:
+6. Build a timer block and set the delay to 1 second.
+------------------------------------------------------------------
+7.  Click "Setup Actions" and set Action #1 to "run" the program block with the argument field blank.
+------------------------------------------------------------------
+8. Set Action #2 to "start" the timer block.
+------------------------------------------------------------------
+9. If you're using Text or Text Bars "LCD MODES 0 or 1" choose the LCD Size:
          SMALL - For Small LCDs
          LARGE - For Large LCDs
 */
 const string LCD_SIZE = "SMALL";
 /*
 ------------------------------------------------------------------
-7. Edit the Text Bar options as you wish.
+10. Edit the Text Bar options if you wish.
 */
 const string L_BAR_SURROUND = " {"; // Left bar surround
 const string R_BAR_SURROUND = "}"; // Right bar surround
@@ -42,7 +51,7 @@ const string BAR_FILLER = "[]"; // Used to fill the bars with text
 const string BAR_BLANK_FILLER = ".."; // Blank Filler for bar
 /*
 ------------------------------------------------------------------
-8. Edit the Text Bar Colors as you wish.
+11. Edit the Text Bar Colors if you wish.
 */
 Color COLOR_HIGH = Color.Green;
 Color COLOR_MEDIUM = Color.Yellow;
@@ -50,24 +59,18 @@ Color COLOR_LOW = Color.Orange;
 Color COLOR_CRIT = Color.Red;
 /*
 ------------------------------------------------------------------
-9. Edit the Text font size.
+12. Edit the Text font size if you wish.
 */
 const float LARGE_FONT_SIZE = 3.0f;
 const float SMALL_FONT_SIZE = 2.5f;
 /*
 ------------------------------------------------------------------
-10. These values are the % when the shield text changes colors.
+13. These values are the % when the shield text changes colors. Edit them if you wish.
 */
 const int SHIELD_HIGH = 74; // High shield value
 const int SHIELD_LOW = 49; // Low shield value
 const int SHIELD_CRIT = 24; // Critical shield value
 /*
-------------------------------------------------------------------
-11. Build a timer block with the time to 1 second and click "Setup Actions".
-------------------------------------------------------------------
-12. Action #1 = "run" the program block but leave the argument field blank.
-------------------------------------------------------------------
-13. Action #2 = "start" the timer block.
 ------------------------------------------------------------------
 
 Troubleshooting:
