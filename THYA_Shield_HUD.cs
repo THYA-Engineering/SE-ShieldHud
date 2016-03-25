@@ -207,18 +207,17 @@ List<int> split_string(string shield_name) {
 }
 
 void prepLCD(List<IMyTerminalBlock> lcdPanels, int percent, float font) {
-    /*foreach(IMyTextPanel lcdPanel in lcdPanels) {*/
     for(var i = 0; i < lcdPanels.Count; i++) {
-        lcdPanel.SetValueFloat("FontSize", font);
+        lcdPanels[i].SetValueFloat("FontSize", font);
 
         if (percent > SHIELD_HIGH) {
-            lcdPanel.SetValue("FontColor", COLOR_HIGH);
+            lcdPanels[i].SetValue("FontColor", COLOR_HIGH);
         } else if (percent <= SHIELD_HIGH && percent > SHIELD_LOW) {
-            lcdPanel.SetValue("FontColor", COLOR_MEDIUM);
+            lcdPanels[i].SetValue("FontColor", COLOR_MEDIUM);
         } else if (percent <= SHIELD_LOW && percent > SHIELD_CRIT) {
-            lcdPanel.SetValue("FontColor", COLOR_LOW);
+            lcdPanels[i].SetValue("FontColor", COLOR_LOW);
         } else {
-            lcdPanel.SetValue("FontColor", COLOR_CRIT);
+            lcdPanels[i].SetValue("FontColor", COLOR_CRIT);
         }
     }
 }
@@ -297,16 +296,16 @@ List<IMyTerminalBlock> initLCD(string lcd_name) {
 
 void setImage(String imageName, List<IMyTerminalBlock> lcds) {
     for(var i = 0; i < lcds.Count; i++) {
-        lcd.ShowTextureOnScreen();
-        lcd.ClearImagesFromSelection();
-        lcd.AddImageToSelection(imageName);
+        lcds[i].ShowTextureOnScreen();
+        lcds[i].ClearImagesFromSelection();
+        lcds[i].AddImageToSelection(imageName);
     }
 }
 
 void setTextLCD(string text, List<IMyTerminalBlock> lcds) {
     for(var i = 0; i < lcds.Count; i++) {
-        lcd.WritePublicText(text);
-        lcd.ShowPublicTextOnScreen();
+        lcds[i].WritePublicText(text);
+        lcds[i].ShowPublicTextOnScreen();
     }
 }
 
