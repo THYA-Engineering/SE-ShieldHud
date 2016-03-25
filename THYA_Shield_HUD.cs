@@ -207,7 +207,8 @@ List<int> split_string(string shield_name) {
 }
 
 void prepLCD(List<IMyTerminalBlock> lcdPanels, int percent, float font) {
-    foreach(IMyTextPanel lcdPanel in lcdPanels) {
+    /*foreach(IMyTextPanel lcdPanel in lcdPanels) {*/
+    for(var i = 0; i < lcdPanels.Count; i++) {
         lcdPanel.SetValueFloat("FontSize", font);
 
         if (percent > SHIELD_HIGH) {
