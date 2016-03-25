@@ -202,8 +202,8 @@ List<int> split_string(string shield_name) {
     splitString = tempString.Split(slashSplit);
 
     List<int> values = new List<int>();
-    values.Add(Int32.parse(splitString[0]));
-    values.Add(Int32.parse(splitString[1]));
+    values.Add(Int32.Parse(splitString[0]));
+    values.Add(Int32.Parse(splitString[1]));
     return values;
 }
 
