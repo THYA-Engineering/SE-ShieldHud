@@ -209,6 +209,7 @@ List<int> split_string(string shield_name) {
 void prepLCD(List<IMyTerminalBlock> lcdPanels, int percent, float font) {
     /*foreach(IMyTextPanel lcdPanel in lcdPanels) {*/
     for(var i = 0; i < lcdPanels.Count; i++) {
+        IMyTextPanel lcdPanel = lcdPanels[i];
         lcdPanel.SetValueFloat("FontSize", font);
 
         if (percent > SHIELD_HIGH) {
@@ -297,6 +298,7 @@ List<IMyTerminalBlock> initLCD(string lcd_name) {
 
 void setImage(String imageName, List<IMyTerminalBlock> lcds) {
     for(var i = 0; i < lcds.Count; i++) {
+        IMyTextPanel lcd = lcds[i];
         lcd.ShowTextureOnScreen();
         lcd.ClearImagesFromSelection();
         lcd.AddImageToSelection(imageName);
@@ -305,6 +307,7 @@ void setImage(String imageName, List<IMyTerminalBlock> lcds) {
 
 void setTextLCD(string text, List<IMyTerminalBlock> lcds) {
     for(var i = 0; i < lcds.Count; i++) {
+        IMyTextPanel lcd = lcds[i];
         lcd.WritePublicText(text);
         lcd.ShowPublicTextOnScreen();
     }
