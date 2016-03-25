@@ -103,7 +103,7 @@ void Main(string argument) {
 
     string shield_name = new String(shieldGenerator[0].CustomName.ToCharArray());
 
-    int [] values = split_string(shield_name);
+    List<int> values = split_string(shield_name);
     int current_shield = values[0];
     int max_shield = values[1];
     int sps = calcSPS(current_shield, max_shield);
@@ -183,7 +183,7 @@ string textFactory(int current_shield, int max_shield, int percent, int sps) {
     return data;
 }
 
-int [] split_string(string shield_name) {
+List<int> split_string(string shield_name) {
 
     string [] tempStringArray = null;
     string tempString = null;
@@ -201,7 +201,7 @@ int [] split_string(string shield_name) {
 
     splitString = tempString.Split(slashSplit);
 
-    int [] values = { Int32.Parse(splitString[0]), Int32.Parse(splitString[1]) };
+    List<int> values = {Int32.Parse(splitString[0]), Int32.Parse(splitString[1])};
     return values;
 }
 
@@ -315,7 +315,7 @@ void setTextLCD(string text, List<IMyTerminalBlock> lcds) {
 }
 
 int calcSPS(int current_shield, int max_shield) {
-    int [] values = getData();
+    List<int> values = getData();
 
     int sps = current_shield - values[0];
     if(current_shield == max_shield) {
@@ -335,10 +335,10 @@ void storeData(int current_shield, int sps) {
     Storage = current_shield.ToString() + ":" + sps.ToString();
 }
 
-int [] getData() {
+List<int> getData() {
     char [] colonSplit = { ':' };
     string [] sData  = Storage.Split(colonSplit);
-    int [] iData = {Convert.ToInt32(sData[0]), Convert.ToInt32(sData[1])};
+    List<int> iData = {Convert.ToInt32(sData[0]), Convert.ToInt32(sData[1])};
     return iData;
 }
 
