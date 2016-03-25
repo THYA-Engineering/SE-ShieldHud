@@ -207,19 +207,22 @@ List<int> split_string(string shield_name) {
 }
 
 void prepLCD(List<IMyTerminalBlock> lcdPanels, int percent, float font) {
-    /*foreach(IMyTextPanel lcdPanel in lcdPanels) {*/
     for(var i = 0; i < lcdPanels.Count; i++) {
+<<<<<<< HEAD
         IMyTextPanel lcdPanel = lcdPanels[i];
         lcdPanel.SetValueFloat("FontSize", font);
+=======
+        lcdPanels[i].SetValueFloat("FontSize", font);
+>>>>>>> d1038f8060b814dd5f8796cda6c0f6c632a21817
 
         if (percent > SHIELD_HIGH) {
-            lcdPanel.SetValue("FontColor", COLOR_HIGH);
+            (IMyTextPanel)lcdPanels[i].SetValue("FontColor", COLOR_HIGH);
         } else if (percent <= SHIELD_HIGH && percent > SHIELD_LOW) {
-            lcdPanel.SetValue("FontColor", COLOR_MEDIUM);
+            (IMyTextPanel)lcdPanels[i].SetValue("FontColor", COLOR_MEDIUM);
         } else if (percent <= SHIELD_LOW && percent > SHIELD_CRIT) {
-            lcdPanel.SetValue("FontColor", COLOR_LOW);
+            (IMyTextPanel)lcdPanels[i].SetValue("FontColor", COLOR_LOW);
         } else {
-            lcdPanel.SetValue("FontColor", COLOR_CRIT);
+            (IMyTextPanel)lcdPanels[i].SetValue("FontColor", COLOR_CRIT);
         }
     }
 }
@@ -298,18 +301,29 @@ List<IMyTerminalBlock> initLCD(string lcd_name) {
 
 void setImage(String imageName, List<IMyTerminalBlock> lcds) {
     for(var i = 0; i < lcds.Count; i++) {
+<<<<<<< HEAD
         IMyTextPanel lcd = lcds[i];
         lcd.ShowTextureOnScreen();
         lcd.ClearImagesFromSelection();
         lcd.AddImageToSelection(imageName);
+=======
+        (IMyTextPanel)lcds[i].ShowTextureOnScreen();
+        (IMyTextPanel)lcds[i].ClearImagesFromSelection();
+        (IMyTextPanel)lcds[i].AddImageToSelection(imageName);
+>>>>>>> d1038f8060b814dd5f8796cda6c0f6c632a21817
     }
 }
 
 void setTextLCD(string text, List<IMyTerminalBlock> lcds) {
     for(var i = 0; i < lcds.Count; i++) {
+<<<<<<< HEAD
         IMyTextPanel lcd = lcds[i];
         lcd.WritePublicText(text);
         lcd.ShowPublicTextOnScreen();
+=======
+        (IMyTextPanel)lcds[i].WritePublicText(text);
+        (IMyTextPanel)lcds[i].ShowPublicTextOnScreen();
+>>>>>>> d1038f8060b814dd5f8796cda6c0f6c632a21817
     }
 }
 
