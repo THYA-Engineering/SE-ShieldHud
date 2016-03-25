@@ -296,7 +296,7 @@ List<IMyTerminalBlock> initLCD(string lcd_name) {
 }
 
 void setImage(String imageName, List<IMyTerminalBlock> lcds) {
-    foreach (IMyTextPanel lcd in lcds) {
+    for(var i = 0; i < lcds.Count; i++) {
         lcd.ShowTextureOnScreen();
         lcd.ClearImagesFromSelection();
         lcd.AddImageToSelection(imageName);
@@ -304,7 +304,7 @@ void setImage(String imageName, List<IMyTerminalBlock> lcds) {
 }
 
 void setTextLCD(string text, List<IMyTerminalBlock> lcds) {
-    foreach (IMyTextPanel lcd in lcds) {
+    for(var i = 0; i < lcds.Count; i++) {
         lcd.WritePublicText(text);
         lcd.ShowPublicTextOnScreen();
     }
