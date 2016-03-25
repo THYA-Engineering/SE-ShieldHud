@@ -201,7 +201,9 @@ List<int> split_string(string shield_name) {
 
     splitString = tempString.Split(slashSplit);
 
-    List<int> values = {Int32.Parse(splitString[0]), Int32.Parse(splitString[1])};
+    List<int> values = new List<int>();
+    values.Add(Int32.parse(splitString[0]));
+    values.Add(Int32.parse(splitString[1]));
     return values;
 }
 
@@ -338,7 +340,11 @@ void storeData(int current_shield, int sps) {
 List<int> getData() {
     char [] colonSplit = { ':' };
     string [] sData  = Storage.Split(colonSplit);
-    List<int> iData = {Convert.ToInt32(sData[0]), Convert.ToInt32(sData[1])};
+
+    List<int> iData = new List<int>();
+
+    iData.Add(Convert.ToInt32(sData[0]));
+    iData.Add(Convert.ToInt32(sData[1]));
     return iData;
 }
 
