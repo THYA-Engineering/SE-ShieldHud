@@ -1,4 +1,4 @@
-/* V1.3.2
+/* V1.3.3
 
 Welcome to THYA's Shield HUD Script.
 
@@ -87,6 +87,7 @@ void Main(string argument) {
     if (string.IsNullOrEmpty(Storage)) {
         Storage = "0:0";
     }
+
     List<IMyTerminalBlock> lcdDisplays = new List<IMyTerminalBlock>();
     List<IMyTerminalBlock> shieldGenerator = new List<IMyTerminalBlock>();
 
@@ -96,7 +97,8 @@ void Main(string argument) {
     if (shieldGenerator.Count == 0) {
         setTextLCD("NO\nSHIELD\nGENERATORS\nFOUND", lcdDisplays);
         throw new Exception("Could not find any shield generators!");
-    } else if (!(shieldGenerator[0].CustomName.Contains("(") || shieldGenerator[0].CustomName.Contains(")"))) {
+    } else if (!(shieldGenerator[0].CustomName.Contains("(") 
+                || shieldGenerator[0].CustomName.Contains(")"))) {
         setTextLCD("BLOCK NAMED IS NOT A SHIELD GENERATOR!", lcdDisplays);
         throw new Exception("Block named is not a shield generator");
     }
@@ -115,7 +117,7 @@ void Main(string argument) {
 
     switch(MODE) {
         case 0:
-        // Text Only
+            // Text Only
             if (LCD_SIZE == "LARGE") {
                 prepLCD(lcdDisplays, percent, LARGE_FONT_SIZE);
                 text = textFactory(current_shield, max_shield, percent, sps);
@@ -132,36 +134,37 @@ void Main(string argument) {
             if (LCD_SIZE == "LARGE") {
                 prepLCD(lcdDisplays, percent, LARGE_FONT_SIZE);
                 text = largeBarFactory(current_shield, max_shield, percent, sps);
-            }        else if (LCD_SIZE == "SMALL") {
+            } else if (LCD_SIZE == "SMALL") {
                 prepLCD(lcdDisplays, percent, SMALL_FONT_SIZE);
                 text = smallBarFactory(current_shield, max_shield, percent, sps);
-            }        else {
+            } else {
                 text = "Incorrect Bar size.\nChoose either\nLARGE or SMALL";
             }
 
             setTextLCD(text, lcdDisplays );
             break;
         case 2:
-        // Horizontal Images
+            // Horizontal Images
             image_prefix = "THYA-ShieldH";
-            text = imageNameFactory(current_shield, max_shield, percent, image_prefix);
+            text = imageNameFactory(percent, image_prefix);
             setImage(text, lcdDisplays );
             break;
         case 3:
-        // Vertical Images
+            // Vertical Images
             image_prefix = "THYA-ShieldV";
-            text = imageNameFactory(current_shield, max_shield, percent, image_prefix);
+            text = imageNameFactory(percent, image_prefix);
             setImage(text, lcdDisplays );
             break;
         case 4:
-        // Circular Images
+            // Circular Images
             image_prefix = "THYA-ShieldC";
-            text = imageNameFactory(current_shield, max_shield, percent, image_prefix);
+            text = imageNameFactory(percent, image_prefix);
             setImage(text, lcdDisplays );
             break;
         default:
-        // Throw error
-            throw new Exception("Incorrect mode: " + MODE.ToString() + "\nPlease choose a valid mode");
+            // Throw error
+            throw new Exception("Incorrect mode: " + MODE.ToString() 
+                    + "\nPlease choose a valid mode");
         break;
     }
 }
@@ -170,6 +173,7 @@ int calcPercent(int current_shield, int max_shield) {
     if (max_shield == 0) {
         return 0;
     }
+
     double dCurrent_shield = current_shield;
     double dMax_shield = max_shield;
     double dPercent = dCurrent_shield / dMax_shield;
@@ -178,8 +182,9 @@ int calcPercent(int current_shield, int max_shield) {
 }
 
 string textFactory(int current_shield, int max_shield, int percent, int sps) {
-    string data = "    Shields:" + percent.ToString() + "%\n\n Shields:" + formatNum(current_shield)
-    + "\n       Full:" + formatNum(max_shield) + "\n       S\\s:" + sps.ToString();
+    string data = "    Shields:" + percent.ToString() + "%\n\n Shields:" 
+        + formatNum(current_shield) + "\n       Full:" 
+        + formatNum(max_shield) + "\n       S\\s:" + sps.ToString();
     return data;
 }
 
@@ -225,7 +230,8 @@ void prepLCD(List<IMyTerminalBlock> lcdPanels, int percent, float font) {
     }
 }
 
-string smallBarFactory(int current_shield, int max_shield, int percent, int sps) {
+string smallBarFactory(int current_shield, int max_shield, 
+        int percent, int sps) {
     string bar = " Shields: " + percent.ToString() + "%\n" + L_BAR_SURROUND;
 
     percent = percent / 5;
@@ -253,10 +259,13 @@ string smallBarFactory(int current_shield, int max_shield, int percent, int sps)
     return bar;
 }
 
-string largeBarFactory(int current_shield, int max_shield, int percent, int sps) {
-    string bar = "            Shields: " + percent.ToString() + "%\n" + L_BAR_SURROUND;
+string largeBarFactory(int current_shield, int max_shield, 
+        int percent, int sps) {
+    string bar = "            Shields: " + percent.ToString() + "%\n" 
+        + L_BAR_SURROUND;
 
     percent = percent / 5;
+
     for (int i = 0; i < 20; i++) {
         if (i < percent) {
             bar += BAR_FILLER;
@@ -265,12 +274,15 @@ string largeBarFactory(int current_shield, int max_shield, int percent, int sps)
         }
     }
 
-    bar += R_BAR_SURROUND + "\n          Shields:" + formatNum(current_shield) + "\n                Full:" + formatNum(max_shield) + "\n                S\\s:" + sps.ToString();
+    bar += R_BAR_SURROUND + "\n          Shields:" 
+        + formatNum(current_shield) + "\n                Full:" 
+        + formatNum(max_shield) + "\n                S\\s:" 
+        + sps.ToString();
 
     return bar;
 }
 
-string imageNameFactory(int current_shield, int max_shield, int percent, string prefix) {
+string imageNameFactory(int percent, string prefix) {
     string image_name = "";
 
     if(percent == 0) return prefix + "000";
@@ -287,32 +299,32 @@ string imageNameFactory(int current_shield, int max_shield, int percent, string 
 }
 
 List<IMyTerminalBlock> initLCD(string lcd_name) {
-    List<IMyTerminalBlock> lcds = new List<IMyTerminalBlock>();
+    List<IMyTerminalBlock> lcdPanels = new List<IMyTerminalBlock>();
     GridTerminalSystem.SearchBlocksOfName(lcd_name, lcds);
 
-    if (lcds.Count == 0) {
+    if (lcdPanels.Count == 0) {
         throw new Exception("Could not find any LCDs!");
     }
 
-    return lcds;
+    return lcdPanels;
 }
 
-void setImage(String imageName, List<IMyTerminalBlock> lcds) {
-    for(var i = 0; i < lcds.Count; i++) {
-        IMyTextPanel lcd = (IMyTextPanel)lcds[i];
+void setImage(String imageName, List<IMyTerminalBlock> lcdPanels) {
+    for(var i = 0; i < lcdPanels.Count; i++) {
+        IMyTextPanel lcdPanel = (IMyTextPanel)lcdPanels[i];
 
-        lcd.ShowTextureOnScreen();
-        lcd.ClearImagesFromSelection();
-        lcd.AddImageToSelection(imageName);
+        lcdPanel.ShowTextureOnScreen();
+        lcdPanel.ClearImagesFromSelection();
+        lcdPanel.AddImageToSelection(imageName);
     }
 }
 
-void setTextLCD(string text, List<IMyTerminalBlock> lcds) {
-    for(var i = 0; i < lcds.Count; i++) {
-        IMyTextPanel lcd = (IMyTextPanel)lcds[i];
+void setTextLCD(string text, List<IMyTerminalBlock> lcdPanels) {
+    for(var i = 0; i < lcdPanels.Count; i++) {
+        IMyTextPanel lcdPanel = (IMyTextPanel)lcdPanels[i];
 
-        lcd.WritePublicText(text);
-        lcd.ShowPublicTextOnScreen();
+        lcdPanel.WritePublicText(text);
+        lcdPanel.ShowPublicTextOnScreen();
     }
 }
 
@@ -325,10 +337,12 @@ int calcSPS(int current_shield, int max_shield) {
         storeData(current_shield, sps);
         return sps;
     }
+
     if(sps == 0) {
         storeData(current_shield, values[1]);
         return values[1];
     }
+
     storeData(current_shield, sps);
     return sps;
 }
@@ -338,7 +352,7 @@ void storeData(int current_shield, int sps) {
 }
 
 List<int> getData() {
-    char [] colonSplit = { ':' };
+    char [] colonSplit = {':'};
     string [] sData  = Storage.Split(colonSplit);
 
     List<int> iData = new List<int>();
