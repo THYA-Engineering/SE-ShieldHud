@@ -84,7 +84,7 @@ Troubleshooting:
 /* -----DO NOT EDIT BELOW THIS LINE----- */
 
 void Main(string argument) {
-    checkStorage();
+    initStorage();
 
     List<IMyTerminalBlock> lcdPanels = new List<IMyTerminalBlock>();
     List<IMyTerminalBlock> shieldGen = new List<IMyTerminalBlock>();
@@ -131,10 +131,10 @@ void Main(string argument) {
             // Bars and Text
             if (LCD_SIZE == "LARGE") {
                 prepLCD(lcdPanels, percent, LARGE_FONT_SIZE);
-                text = largeBarFactory(curShield, maxShield, percent, sps);
+                text = lgBarFactory(curShield, maxShield, percent, sps);
             } else if (LCD_SIZE == "SMALL") {
                 prepLCD(lcdPanels, percent, SMALL_FONT_SIZE);
-                text = smallBarFactory(curShield, maxShield, percent, sps);
+                text = smBarFactory(curShield, maxShield, percent, sps);
             } else {
                 text = "Incorrect Bar size.\nChoose either\nLARGE or SMALL";
             }
@@ -145,19 +145,19 @@ void Main(string argument) {
             // Horizontal Images
             imgPrefix = "THYA-ShieldH";
             text = imgNameFactory(percent, imgPrefix);
-            setImage(text, lcdPanels );
+            setImageLCD(text, lcdPanels );
             break;
         case 3:
             // Vertical Images
             imgPrefix = "THYA-ShieldV";
             text = imgNameFactory(percent, imgPrefix);
-            setImage(text, lcdPanels );
+            setImageLCD(text, lcdPanels );
             break;
         case 4:
             // Circular Images
             imgPrefix = "THYA-ShieldC";
             text = imgNameFactory(percent, imgPrefix);
-            setImage(text, lcdPanels );
+            setImageLCD(text, lcdPanels );
             break;
         default:
             // Throw error
@@ -228,7 +228,7 @@ void prepLCD(List<IMyTerminalBlock> lcdPanels, int percent, float font) {
     }
 }
 
-string smallBarFactory(int curShield, int maxShield, 
+string smBarFactory(int curShield, int maxShield, 
         int percent, int sps) {
     string bar = " Shields: " + percent.ToString() + "%\n" + L_BAR_SURROUND;
 
@@ -257,7 +257,7 @@ string smallBarFactory(int curShield, int maxShield,
     return bar;
 }
 
-string largeBarFactory(int curShield, int maxShield, 
+string lgBarFactory(int curShield, int maxShield, 
         int percent, int sps) {
     string bar = "            Shields: " + percent.ToString() + "%\n" 
         + L_BAR_SURROUND;
@@ -307,7 +307,7 @@ List<IMyTerminalBlock> initLCD(string lcdName) {
     return lcdPanels;
 }
 
-void setImage(String imgName, List<IMyTerminalBlock> lcdPanels) {
+void setImageLCD(String imgName, List<IMyTerminalBlock> lcdPanels) {
     for(var i = 0; i < lcdPanels.Count; i++) {
         IMyTextPanel lcdPanel = (IMyTextPanel)lcdPanels[i];
 
@@ -345,6 +345,12 @@ int calcSPS(int curShield, int maxShield) {
     return sps;
 }
 
+void initStorage() {
+    if (string.IsNullOrEmpty(Storage)) {
+        Storage = "0:0";
+    }
+}
+
 void storeData(int curShield, int sps) {
     Storage = curShield.ToString() + ":" + sps.ToString();
 }
@@ -371,11 +377,5 @@ string formatNum(int num) {
         return (num / 1000D).ToString("0.##k");
     } else {
         return num.ToString("N0");
-    }
-}
-
-void checkStorage() {
-    if (string.IsNullOrEmpty(Storage)) {
-        Storage = "0:0";
     }
 }
