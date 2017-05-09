@@ -36,5 +36,5 @@ Comments will persist until the issue has been resolved. After that, they will b
 #### THYA Shield HUD Graphics Pack 1% 
 <http://steamcommunity.com/sharedfiles/filedetails/?id=540003236>
 
-#### Cython's (BETA) Energy Shields: 
+#### Cython's Energy Shields: 
 <http://steamcommunity.com/workshop/filedetails/?id=484504816>
