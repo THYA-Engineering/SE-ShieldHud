@@ -8,7 +8,7 @@ https://github.com/THYA-Engineering/SE-ShieldHud
 Setup Instructions:
 Follow these steps changing only the values after = some of which are in "Quotes" if need be.
 ------------------------------------------------------------------
-1. Install Energy Shields by Cython from the Steam and add it to your mod list.
+1. Install Energy Shields by Cython from Steam and add it to your mod list.
    Workshop: http://steamcommunity.com/workshop/filedetails/?id=484504816
 ------------------------------------------------------------------
 2. Install the THYA Shield HUD Graphics Pack and add it to your mod list: http://bit.ly/1PVsZQ6
