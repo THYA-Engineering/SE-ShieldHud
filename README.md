@@ -25,7 +25,7 @@ This script displays your ships shield as a percentage with a visual bar output 
 * If you are still having issues after trying the above, please contact [me](http://steamcommunity.com/id/Perdurable) me on Steam and I will assist you.
 
 ## Quick Tutorial: 
-<https://youtu.be/wcae2yJKjBQ>
+<https://youtu.be/9Zx5lMI8KXA>
 
 
 ### Note:
