@@ -298,7 +298,7 @@ string imgNameFactory(int percent, string prefix) {
 
 List<IMyTerminalBlock> initLCD(string lcdName) {
     List<IMyTerminalBlock> lcdPanels = new List<IMyTerminalBlock>();
-    GridTerminalSystem.SearchBlocksOfName(lcdName, lcds);
+    GridTerminalSystem.SearchBlocksOfName(lcdName, lcdPanels);
 
     if (lcdPanels.Count == 0) {
         throw new Exception("Could not find any LCDs!");
