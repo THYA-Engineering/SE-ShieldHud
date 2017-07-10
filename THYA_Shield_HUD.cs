@@ -1,4 +1,4 @@
-/* V1.3.3
+/* V1.3.4
 
 Welcome to THYA's Shield HUD Script.
 
