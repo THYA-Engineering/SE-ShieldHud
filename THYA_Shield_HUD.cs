@@ -27,7 +27,7 @@ const string LCD_NAME = "Shield LCD";
          3 - Vertical Shield Bar
          4 - Arched Shield Bar
 */
-const int MODE = 1;
+const int DISPLAY_MODE = 1;
 /*
 ------------------------------------------------------------------
 6. Build a timer block and set the delay to 1 second.
@@ -113,7 +113,7 @@ void Main(string argument) {
     string imgPrefix = "";
     string text = "";
 
-    switch(MODE) {
+    switch(DISPLAY_MODE) {
         case 0:
             // Text Only
             if (LCD_SIZE == "LARGE") {
@@ -161,7 +161,7 @@ void Main(string argument) {
             break;
         default:
             // Throw error
-            throw new Exception("Incorrect mode: " + MODE.ToString() 
+            throw new Exception("Incorrect mode: " + DISPLAY_MODE.ToString() 
                     + "\nPlease choose a valid mode");
             break;
     }
