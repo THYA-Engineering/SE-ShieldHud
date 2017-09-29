@@ -313,7 +313,7 @@ void setImageLCD(String imgName, List<IMyTerminalBlock> lcdPanels) {
 
         lcdPanel.ClearImagesFromSelection();
         lcdPanel.AddImageToSelection(imgName);
-        lcdPanel.ShowTextureOnScreen();
+        lcdPanel.ShowTextureOnScreen;
     }
 }
 
