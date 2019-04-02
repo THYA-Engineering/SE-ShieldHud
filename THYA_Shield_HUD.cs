@@ -6,11 +6,11 @@ Welcome to THYA's Shield HUD Script.
 Setup Instructions:
 1. Install one or both of the following energy shield mods:
 	Energy Shields by Cython: http://steamcommunity.com/workshop/filedetails/?id=484504816
-      AND / OR
+		AND / OR
 	Defense Shield Mod Pack by DarkStar: http://steamcommunity.com/sharedfiles/filedetails/?id=1365616918
 
 2. Install the THYA Shield HUD Graphics Pack if you wish to use LCD Images:
-    Workshop: http://steamcommunity.com/sharedfiles/filedetails/?id=540003236
+	(THYA) Shield HUD Graphics Pack 1%: http://steamcommunity.com/sharedfiles/filedetails/?id=540003236
     
 3. An LCD's name is what decides its display type. If you desire to change the default name change the text in "Quotes".
 	
