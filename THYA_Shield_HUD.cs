@@ -10,7 +10,7 @@ Setup Instructions:
 	Defense Shield Mod Pack by DarkStar: http://steamcommunity.com/sharedfiles/filedetails/?id=1365616918
 
 2. Install the THYA Shield HUD Graphics Pack if you wish to use LCD Images:
-	(THYA) Shield HUD Graphics Pack 1%: http://steamcommunity.com/sharedfiles/filedetails/?id=540003236
+    (THYA) Shield HUD Graphics Pack 1%: http://steamcommunity.com/sharedfiles/filedetails/?id=540003236
     
 3. An LCD's name is what decides its display type. If you desire to change the default name change the text in "Quotes".
 	
@@ -41,7 +41,6 @@ Example LCD Names:
     • DS gets "Defense Shield" overlay (DSR gets rotated "D Shield") - only displays defense shield charge.
     • SGDUAL gets both displayed on small grids (SGDUALR gets rotated) - not enough room for this on a large grid.
        *SGDUAL does not mix display types - all rainbow or all colored, not one of each.
-
 
 -------------------------------------------------------------------------------------------------------------------------------------
 Advanced Settings:
@@ -75,7 +74,6 @@ const int shieldAudioWarning = 24; /* Sound Block Activation Percentage
 Critical Shield Light Settings. */
 const string shieldLightName = "[Critical Shield Light]";
 const int shieldVisualWarning = 24; /* Light activation Percentage
-
 
 -------------------------------------------------------------------------------------------------------------------------------------
 Troubleshooting:
