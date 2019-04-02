@@ -1,93 +1,92 @@
-/* V1.6.3
+/* 
+V1.7.0
 
 Welcome to THYA's Shield HUD Script.
-
+-------------------------------------------------------------------------------------------------------------------------------------
 Setup Instructions:
-Follow these steps changing only the values after = some of which are in "Quotes" if need be.
-----------------------------------------------------------------------------------------------------------------------------------
-1. Install Energy Shields by Cython from Steam and add it to your mod list.
-    Workshop: http://steamcommunity.com/workshop/filedetails/?id=484504816
+1. Install one or both of the following energy shield mods:
+	Energy Shields by Cython: http://steamcommunity.com/workshop/filedetails/?id=484504816
       AND / OR
-    Install Defense Shield Mod Pack by DarkStar from Steam and add it to your mod list.
-    Workshop: http://steamcommunity.com/sharedfiles/filedetails/?id=1365616918
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    Both Mods may be installed at the same time, and will coexist peacefully. (Thank you, JTurp)
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-2. Install the THYA Shield HUD Graphics Pack and add it to your mod list: http://bit.ly/1PVsZQ6
+	Defense Shield Mod Pack by DarkStar: http://steamcommunity.com/sharedfiles/filedetails/?id=1365616918
+
+2. Install the THYA Shield HUD Graphics Pack if you wish to use LCD Images:
     Workshop: http://steamcommunity.com/sharedfiles/filedetails/?id=540003236
-----------------------------------------------------------------------------------------------------------------------------------
-3. Name your Shield Generators WHATEVER YOU WANT! The script will find them automatically!
-----------------------------------------------------------------------------------------------------------------------------------
-4. LCD displays can be set up per screen now, rather than one type grid-wide.
-    The 2 parts of this naming setup are below.
-----------------------------------------------------------------------------------------------------------------------------------
-4a. Edit the first half your LCD's name to include the text of lcdNamePrefix. */
+    
+3. An LCD's name is what decides its display type. If you desire to change the default name change the text in "Quotes".
+	
+Edit the first half your LCD's name to the text of lcdNamePrefix. */
 const string lcdNamePrefix = "[Shield LCD"; /*
-4b. Edit the second half of your LCD's name to one of the lcdMode strings to set your Shield LCD's display mode: */
+
+Edit the second half of your LCD's name to a desired lcdMode string. */
 const string lcdModeTDS = ":TDS]"; // Text Display Only - Small Font
 const string lcdModeTDL = ":TDL]"; // Text Display Only - Large Font
 const string lcdModeBTS = ":BTS]"; // Bars and Text Shield Display - Small Font
 const string lcdModeBTL = ":BTL]"; // Bars and Text Shield Display - Large Font
-const string lcdModeCTD = ":CTD]"; // Corner LCD Text Display, % on large grid - % and SPS on small grid
-const string lcdModeCRB = ":CRB]"; // Corner LCD Rainbow Bar - See note below on CRB+CCB Mode to change text overlay
-const string lcdModeCCB = ":CCB]"; // Corner LCD Colored Bar - See note below on CRB+CCB Mode to change text overlay
-const string lcdModeGfxH = ":THYA-H]"; // Horizontal Shield Bar
-const string lcdModeGfxV = ":THYA-V]"; // Vertical Shield Bar
-const string lcdModeGfxC = ":THYA-C]"; // Curved Shield Bar
-/*
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    Note on the CRB + CCB Modes - I felt the naming box was getting crowded, so text overlays are changed
-    	in the "Custom Data" of the LCD block.  These auto-size to the "pixel" size of all the corner LCDs.
-    	• Blank, or any random text not covered below - gets horizontal "Shield" overlay.
-    	• SR gets rotated "Shield" overlay (for vertical screen installation).
-    	• ES gets "Energy Shield" overlay (ESR gets rotated "E Shield") - only displays energy shield charge.
-    	• DS gets "Defense Shield" overlay (DSR gets rotated "D Shield") - only displays defense shield charge.
-    	• SGDUAL gets both displayed on small grids (SGDUALR gets rotated) - not enough room for this on large grid.
-           *SGDUAL does not mix display types - all rainbow or all colored, not one of each.
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    So, to double clarify: if you want a screen to show Text Display Only - Large Font, the
-    full name should read "[Shield LCD:TDL]".  Curved Shield Bar would be "[Shield LCD:THYA-C]".
-    The script searches only for the parts of the name, so if you want to do "[Shield LCD 36:TDL]",
-    or ":THYA-H][Shield LCD Engineering", you shouldn't have any problems.
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-5. Edit the Text Bar options if you wish. */
+const string lcdModeCTD = ":CTD]"; // Corner LCD Text Display Only
+const string lcdModeCRB = ":CRB]"; // Corner LCD Rainbow Bar
+const string lcdModeCCB = ":CCB]"; // Corner LCD Colored Bar
+const string lcdModeGfxH = ":THYA-H]"; // Horizontal Shield Bar Images
+const string lcdModeGfxV = ":THYA-V]"; // Vertical Shield Bar Images
+const string lcdModeGfxC = ":THYA-C]"; /* Curved Shield Bar Images 
+ 
+Example LCD Names:
+[Shield LCD:THYA-H]
+[Shield LCD:BTL]
+[Shield LCD:CCB]
+
+-Note on the CRB + CCB Modes text overlays are changed in the "Custom Data" of the LCD block.
+    • Blank, or any random text not covered below - shows horizontal "Shield" overlay.
+    • SR gets rotated "Shield" overlay (for vertical screen installation).
+    • ES gets "Energy Shield" overlay (ESR gets rotated "E Shield") - only displays energy shield charge.
+    • DS gets "Defense Shield" overlay (DSR gets rotated "D Shield") - only displays defense shield charge.
+    • SGDUAL gets both displayed on small grids (SGDUALR gets rotated) - not enough room for this on a large grid.
+       *SGDUAL does not mix display types - all rainbow or all colored, not one of each.
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+Advanced Settings:
+
+Text Bar Settings. */
 const string lBarSurr = " {"; // Left bar surround
 const string rBarSurr = "}"; // Right bar surround
 const string BarEmpty = ".."; // Blank Filler for bar
-const string BarFill = "[]"; // Used to fill the bars with text
-/*--------------------------------------------------------------------------------------------------------------------------------
-6. Edit the Text Bar Colors if you wish. */
+const string BarFill = "[]"; /* Used to fill the bars with text
+
+Text Bar Color Setting. */
 Color txtColHigh = Color.Green;
 Color txtColMed = Color.Yellow;
 Color txtColLow = Color.Orange;
-Color txtColCrit = Color.Red;
-/*--------------------------------------------------------------------------------------------------------------------------------
-7. Edit the Text font size if you wish. */
+Color txtColCrit = Color.Red; /*
+
+Text Font Size Settings. */
 const float lFontSize = 3.0f; // Large
 const float sFontSize = 2.5f; // Small
-const float cFontSize = 2.2f; // Corner
-/*--------------------------------------------------------------------------------------------------------------------------------
-8. These values are the % when the shield text changes colors. Edit them if you wish. */
+const float cFontSize = 2.2f; /* Corner 
+
+Text Based Shield Color Change Percentages. */
 const int shieldHigh = 74; // High shield value
 const int shieldLow = 49; // Low shield value
-const int shieldCrit = 24; // Critical shield value
-/*--------------------------------------------------------------------------------------------------------------------------------
-9. These values are the names for warning lights or sound blocks, and
-the percentages at which the warning lights or sound blocks activate. */
-const string shieldAudioName = "[Shield Alarm]";
-const int shieldAudioWarning = 24; // Sound Block %
-const string shieldLightName = "[Low Shield Light]";
-const int shieldVisualWarning = 24; // Light %
-/*
-This is a pretty basic implementation.  You have to pick a sound on the sound blocks,
-and set up the warning lights' colors and blink settings to your preference before naming them,
-as they're a simple on/off switch.
--------------------------------------------------------------------------------------------------------------------------------------
+const int shieldCrit = 24; /* Critical shield value 
 
+Sound Block Settings. */
+const string shieldAudioName = "[Shield Alarm]";
+const int shieldAudioWarning = 24; /* Sound Block Activation Percentage
+
+Critical Shield Light Settings. */
+const string shieldLightName = "[Critical Shield Light]";
+const int shieldVisualWarning = 24; /* Light activation Percentage
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
 Troubleshooting:
--If you have an exception you need to fix the issue then "remember and exit" and "run" to refresh the system.
+-Make sure your LCD is named in the correct format. Examples [Shield LCD:THYA-C] or [Shield LCD:BTS]
+-Click the edit button on the program block then click "remember and exit" then re-run the script.
 -Shield generators bug out sometimes so you may just need to reload the game.
 -It is possible you accidentally bugged the code so try deleting the code and reloading it off the workshop.
+-Load a new world with only the shield and graphics mods. Some other mods may conflict with the script.
+-If you are a server operator DO NOT subscribe the server to this script. It will cause numerous issues. Each user must subscribe to this script individually.
+	If you notice your server has subscribed to this script please inform your server moderator.
+-If you are still having issues please contact us.
 */
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
