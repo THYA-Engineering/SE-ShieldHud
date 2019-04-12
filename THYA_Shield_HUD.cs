@@ -1,4 +1,4 @@
-/* V1.6.3
+/* V1.6.4
 
 Welcome to THYA's Shield HUD Script.
 
@@ -134,7 +134,7 @@ const string monoBorderB = "�
 const string monoBorderL = "";
 const string monoBorderR = "\n";
 string[] clcdBGW = new string[] {"","",""};
-string[] clcdROYC = new string[] {"","","",""};
+string[] clcdROYC = new string[] {"","","",""};
 string[] rainbowBarChars = new string[] {"","","","","","","","","","","","","","","","","","","","","",""};
 int[] shieldOnlyG = {56,57,58,59,63,64,65,68,69,70,72,73,74,75,76,77,78,80,81,82,83,84,85,86,87,89,90,91,98,99,100,101,102,103,216,221,224,226,229,231,233,239,241,248,250,252,259,265,376,379,380,383,385,387,390,392,394,395,396,398,399,400,402,404,405,406,407,408,409,411,413,420,422,423,424,427,537,
   539,542,543,544,546,548,551,553,557,559,563,565,572,574,581,583,586,588,698,701,702,703,707,709,710,711,712,714,718,720,724,726,727,728,729,730,733,735,742,744,747,749,860,865,868,875,879,881,885,891,894,896,903,905,908,910,1022,1023,1024,1027,1029,1031,1032,1033,1034,1036,1040,1042,1046,1048,
@@ -229,16 +229,18 @@ bool Setup()
   for (int i = 0; i < gridBlocks.Count; i++) {
     var block = gridBlocks[i];
 
-    if (block is IMyTextPanel && block.CustomName.Contains(lcdNamePrefix))
-      lcdPanels.Add(block as IMyTextPanel);
-    else if (block is IMySoundBlock && block.CustomName.Contains(shieldAudioName))
-      soundBlocks.Add(block as IMySoundBlock);
-    else if (block is IMyLightingBlock && block.CustomName.Contains(shieldLightName))
-      warningLights.Add(block as IMyLightingBlock);
-    else if (shieldTypesCython.Contains(block.BlockDefinition.SubtypeName))
-      shieldGenList.Add(block);
-    else if (shieldTypesDStar.Contains(block.BlockDefinition.SubtypeName))
-      defShieldList.Add(block);
+    if (block.IsSameConstructAs(Me)){
+      if (block is IMyTextPanel && block.CustomName.Contains(lcdNamePrefix))
+        lcdPanels.Add(block as IMyTextPanel);
+      else if (block is IMySoundBlock && block.CustomName.Contains(shieldAudioName))
+        soundBlocks.Add(block as IMySoundBlock);
+      else if (block is IMyLightingBlock && block.CustomName.Contains(shieldLightName))
+        warningLights.Add(block as IMyLightingBlock);
+      else if (shieldTypesCython.Contains(block.BlockDefinition.SubtypeName))
+        shieldGenList.Add(block);
+      else if (shieldTypesDStar.Contains(block.BlockDefinition.SubtypeName))
+        defShieldList.Add(block);
+    }
   }
 
   if (shieldGenList.Count == 0 && defShieldList.Count == 0) {
@@ -264,7 +266,7 @@ bool Setup()
   return true;
 }
 
-void Main(string argument, UpdateType updateSource) { try { SubMain(argument, updateSource); } catch (Exception e) { var sb = new StringBuilder(); sb.AppendLine("Exception Message:"); sb.AppendLine($"   {e.Message}"); sb.AppendLine(); sb.AppendLine("Stack trace:"); sb.AppendLine(e.StackTrace); sb.AppendLine(); var exceptionDump = sb.ToString(); var lcd = GridTerminalSystem.GetBlockWithName("Debug LCD") as IMyTextPanel; Echo(exceptionDump); Me.CustomData = exceptionDump; lcd?.WritePublicText(exceptionDump, append: false); throw; } }
+void Main(string argument, UpdateType updateSource) { try { SubMain(argument, updateSource); } catch (Exception e) { var sb = new StringBuilder(); sb.AppendLine("Exception Message:"); sb.AppendLine($"   {e.Message}"); sb.AppendLine(); sb.AppendLine("Stack trace:"); sb.AppendLine(e.StackTrace); sb.AppendLine(); var exceptionDump = sb.ToString(); var lcd = GridTerminalSystem.GetBlockWithName("Debug LCD") as IMyTextPanel; Echo(exceptionDump); Me.CustomData = exceptionDump; lcd?.WriteText(exceptionDump, append: false); throw; } }
 
 void SubMain(string argument, UpdateType updateSource)
 {
@@ -360,7 +362,9 @@ void SubMain(string argument, UpdateType updateSource)
         lcdPanel.FontSize = 0.111f;
         lcdPanel.FontColor = Color.Gray;
         if (lcdPanel.CubeGrid.GridSizeEnum.ToString() == "Large") {
-          if (lcdPanel.DetailedInfo.Contains("Corner LCD Flat")) {
+          if (lcdPanel.DetailedInfo.Contains("MA_HeavyBridge_B1T")) {
+            rainbowBarFactory(barCounter,31,lcdString,lcdPanel.CustomData);
+          } else if (lcdPanel.DetailedInfo.Contains("Corner LCD Flat")) {
             rainbowBarFactory(barCounter,27,lcdString,lcdPanel.CustomData);
           } else {
             rainbowBarFactory(barCounter,24,lcdString,lcdPanel.CustomData);
@@ -379,7 +383,9 @@ void SubMain(string argument, UpdateType updateSource)
         lcdPanel.FontSize = 0.111f;
         lcdPanel.FontColor = Color.Gray;
         if (lcdPanel.CubeGrid.GridSizeEnum.ToString() == "Large") {
-          if (lcdPanel.DetailedInfo.Contains("Corner LCD Flat")) {
+          if (lcdPanel.DetailedInfo.Contains("MA_HeavyBridge_B1T")) {
+            roycBarFactory(barCounter,31,lcdString,lcdPanel.CustomData);
+          } else if (lcdPanel.DetailedInfo.Contains("Corner LCD Flat")) {
             roycBarFactory(barCounter,27,lcdString,lcdPanel.CustomData);
           } else {
             roycBarFactory(barCounter,24,lcdString,lcdPanel.CustomData);
@@ -393,8 +399,8 @@ void SubMain(string argument, UpdateType updateSource)
           }
         }
       }
-      lcdPanel.WritePublicText(lcdString);
-      lcdPanel.ShowPublicTextOnScreen();
+      lcdPanel.ClearImagesFromSelection();
+      lcdPanel.WriteText(lcdString);
     }
     else if (lcdPanel.CustomName.Contains(lcdModeGfxH)) {
       ImgNameFactory(percent, "THYA-ShieldH", lcdString);
@@ -666,12 +672,13 @@ void ImgNameFactory(int percent, string prefix, StringBuilder imgName)
     imgName.Append(prefix + "00" + percent.ToString());
   else if (percent < 100)
     imgName.Append(prefix + "0" + percent.ToString());
-  else if (percent == 100)
-    imgName.Append(prefix + percent.ToString());
+  else if (percent >= 100)
+    imgName.Append(prefix + "100");
 }
 
 void SetImageLCD(string imgName, IMyTextPanel lcdPanel)
 {
+  lcdPanel.WriteText("");
   if (imgName != lcdPanel.CurrentlyShownImage) {
     lcdPanel.AddImageToSelection(imgName);
     lcdPanel.RemoveImageFromSelection(lcdPanel.CurrentlyShownImage);
@@ -679,7 +686,6 @@ void SetImageLCD(string imgName, IMyTextPanel lcdPanel)
   if (lcdPanel.CurrentlyShownImage == null) {
     lcdPanel.AddImageToSelection(imgName);
   }
-  lcdPanel.ShowTextureOnScreen();
 }
 
 int CalcSPS(int curShields, int maxShields)
