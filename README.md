@@ -1,4 +1,4 @@
-# Current Script Version: 1.6.3
+# Current Script Version: 1.6.5
 This script displays your ships shields as a percentage with a visual bar output to an ingame LCD. It works with both DarkStar's Defense Shield Mod and Cython's Energy Shields simultaneously. It's easy to edit or customize and includes a video tutorial.
 
 ## Current Version Features: 
@@ -13,7 +13,8 @@ This script displays your ships shields as a percentage with a visual bar output
 * Corner LCD shield display.
 * Text / Shield Per Second shield display.
 * Text / Shield Per Second, and Text Bar shield display.
-* Multiple LCD support. 
+* Multiple LCD support.
+* Added support for the MA Heavy Bridge Mod LCD
 
 ## Solving Issues:
 * Make sure your LCD is named in the correct format. Examples [Shield LCD:THYA-C] or [Shield LCD:BTS]
